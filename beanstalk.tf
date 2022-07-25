@@ -14,37 +14,37 @@ resource "aws_elastic_beanstalk_environment" "this" {
 
   setting {
     namespace = "aws:ec2:vpc"
-    name      = "VPCId"
-    value     = local.vpc_id
-  }
-
-  setting {
-    namespace = "aws:ec2:vpc"
-    name      = "Subnets"
-    value     = join(",", local.private_subnet_ids)
-  }
-
-  setting {
-    namespace = "aws:ec2:vpc"
-    name      = "ELBSubnets"
-    value     = join(",", local.public_subnet_ids)
-  }
-
-  setting {
-    namespace = "aws:ec2:vpc"
     name      = "ELBScheme"
     value     = "public"
   }
 
   setting {
+    namespace = "aws:ec2:vpc"
+    name      = "ELBSubnets"
+    value     = join(",", sort(local.public_subnet_ids))
+  }
+
+  setting {
     namespace = "aws:autoscaling:launchconfiguration"
     name      = "IamInstanceProfile"
-    value     = aws_iam_instance_profile.this.arn
+    value     = aws_iam_instance_profile.this.name
   }
 
   setting {
     namespace = "aws:autoscaling:launchconfiguration"
     name      = "SecurityGroups"
     value     = join(",", [aws_security_group.this.id])
+  }
+
+  setting {
+    namespace = "aws:ec2:vpc"
+    name      = "Subnets"
+    value     = join(",", sort(local.private_subnet_ids))
+  }
+
+  setting {
+    namespace = "aws:ec2:vpc"
+    name      = "VPCId"
+    value     = local.vpc_id
   }
 }
