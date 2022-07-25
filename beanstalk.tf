@@ -35,4 +35,16 @@ resource "aws_elastic_beanstalk_environment" "this" {
     name      = "ELBScheme"
     value     = "public"
   }
+
+  setting {
+    namespace = "aws:autoscaling:launchconfiguration"
+    name      = "IamInstanceProfile"
+    value     = aws_iam_instance_profile.this.arn
+  }
+
+  setting {
+    namespace = "aws:autoscaling:launchconfiguration"
+    name      = "SecurityGroups"
+    value     = join(",", [aws_security_group.this.id])
+  }
 }
