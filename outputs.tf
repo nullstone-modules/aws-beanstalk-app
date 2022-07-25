@@ -40,6 +40,11 @@ output "beanstalk_arn" {
   description = "string ||| Elastic Beanstalk App ARN"
 }
 
+output "environment_id" {
+  value       = aws_elastic_beanstalk_environment.this.id
+  description = "string ||| The ID of the this Elastic Beanstalk Environment"
+}
+
 locals {
   // Private and public URLs are shown in the Nullstone UI
   // Typically, they are created through capabilities attached to the application
