@@ -14,7 +14,7 @@ output "artifacts_bucket_name" {
 }
 
 output "artifacts_key_template" {
-  value       = "app-{{app-version}}.zip"
+  value       = "{{app-version}}/app.zip"
   description = "string ||| Template for s3 object key that is used for Beanstalk App Version ({{app-version}} is replaced with the app-version)"
 }
 
