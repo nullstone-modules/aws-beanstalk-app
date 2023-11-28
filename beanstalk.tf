@@ -43,7 +43,7 @@ locals {
     }
   ]
   cap_settings = lookup(local.capabilities, "settings", [])
-  all_settings = concat(local.basic_settings, local.cap_settings)
+  all_settings = { for setting in concat(local.basic_settings, local.cap_settings) : "${setting.namespace}/${setting.name}" => setting }
 }
 
 resource "aws_elastic_beanstalk_environment" "this" {
