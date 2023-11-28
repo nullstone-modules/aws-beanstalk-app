@@ -67,16 +67,4 @@ resource "aws_elastic_beanstalk_environment" "this" {
       value     = setting.value.value
     }
   }
-
-  setting {
-    namespace = "aws:autoscaling:asg"
-    name      = "MinSize"
-    value     = var.minimum_instances
-  }
-
-  setting {
-    namespace = "aws:autoscaling:asg"
-    name      = "MaxSize"
-    value     = var.maximum_instances
-  }
 }
