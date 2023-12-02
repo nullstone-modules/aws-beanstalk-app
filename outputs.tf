@@ -51,7 +51,7 @@ output "log_provider" {
 }
 
 output "log_group_name" {
-  value       = module.logs.name // TODO: fix this. how do I get the log group name that's created from Terraform?
+  value       = "/aws/elasticbeanstalk/${aws_elastic_beanstalk_application.this.name}"
   description = "string ||| "
 }
 
