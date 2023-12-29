@@ -28,7 +28,7 @@ data "aws_iam_policy_document" "log_reader" {
     ]
 
     resources = [
-      "${aws_cloudwatch_log_group.this.arn}:log-stream:*"
+      "arn:aws:logs:${data.aws_region.this.name}:${data.aws_caller_identity.current.account_id}:log-group:*:log-stream:*"
     ]
   }
 }
