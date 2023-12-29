@@ -51,7 +51,7 @@ output "log_provider" {
 }
 
 output "log_group_name" {
-  value       = "${local.log_group}"
+  value       = local.log_group
   description = "string ||| A wildcard pattern that matches a list of AWS Cloudwatch logs groups containing application logs"
 }
 
