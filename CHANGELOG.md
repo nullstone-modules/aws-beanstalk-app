@@ -1,3 +1,7 @@
+# 0.2.4 (Jan 29, 2024)
+* Added additional permissions to `deployer` so that deployments can create secondary resources.
+* Fixed log reader reading the correct log groups.
+
 # 0.2.3 (Jan 27, 2024)
 * Fixed `nullstone push` by adding `s3:GetBucketLocation` to `Pusher`.
 
