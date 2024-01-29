@@ -94,6 +94,7 @@ data "aws_iam_policy_document" "deployer-beanstalk" {
       "s3:GetBucketPolicy",
       "s3:CreateBucket",
       "s3:GetBucketLocation",
+      "s3:GetObjectVersion"
     ]
 
     resources = [
@@ -116,6 +117,7 @@ data "aws_iam_policy_document" "deployer-beanstalk" {
       "cloudformation:DescribeStacks",
       "cloudformation:UpdateStack",
       "cloudformation:CancelUpdateStack",
+      "cloudformation:ListStackResources",
     ]
   }
 
@@ -133,7 +135,18 @@ data "aws_iam_policy_document" "deployer-beanstalk" {
       "autoscaling:ResumeProcesses",
       "autoscaling:DescribeAutoScalingGroups",
       "autoscaling:DescribeLaunchConfigurations",
-      "autoscaling:PutNotificationConfiguration"
+      "autoscaling:PutNotificationConfiguration",
+      "elasticloadbalancing:DescribeLoadBalancers"
     ]
+  }
+
+  statement {
+    sid       = "AllowLogsForBeanstalk"
+    effect    = "Allow"
+    actions   = [
+      "logs:CreateLogGroup",
+      "logs:PutRetentionPolicy"
+    ]
+    resources = ["arn:aws:logs:${data.aws_region.this.name}:*:log-group:${local.log_group}"]
   }
 }
