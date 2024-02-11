@@ -1,3 +1,6 @@
+# 0.2.5 (Feb 10, 2024)
+* Added permissions to `adminer` to fix deploys and ssh.
+
 # 0.2.4 (Jan 29, 2024)
 * Added additional permissions to `deployer` so that deployments can create secondary resources.
 * Fixed log reader reading the correct log groups.
