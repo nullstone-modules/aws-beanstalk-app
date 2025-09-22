@@ -77,7 +77,7 @@ data "aws_iam_policy_document" "deployer-beanstalk" {
     sid       = "AllBeanstalkOnSolutionStacks"
     effect    = "Allow"
     actions   = ["elasticbeanstalk:*"]
-    resources = ["arn:aws:elasticbeanstalk:${data.aws_region.this.name}::solutionstack/*"]
+    resources = ["arn:aws:elasticbeanstalk:${local.region}::solutionstack/*"]
   }
 
   statement {
@@ -147,6 +147,6 @@ data "aws_iam_policy_document" "deployer-beanstalk" {
       "logs:CreateLogGroup",
       "logs:PutRetentionPolicy"
     ]
-    resources = ["arn:aws:logs:${data.aws_region.this.name}:*:log-group:${local.log_group}"]
+    resources = ["arn:aws:logs:${local.region}:*:log-group:${local.log_group}"]
   }
 }

@@ -40,13 +40,13 @@ data "aws_iam_policy_document" "encryption_key" {
 
     principals {
       type        = "Service"
-      identifiers = ["logs.${data.aws_region.this.name}.amazonaws.com"]
+      identifiers = ["logs.${local.region}.amazonaws.com"]
     }
 
     condition {
       test     = "ArnEquals"
       variable = "kms:EncryptionContext:aws:logs:arn"
-      values   = ["arn:aws:logs:${data.aws_region.this.name}:${data.aws_caller_identity.this.account_id}:*"]
+      values   = ["arn:aws:logs:${local.region}:${data.aws_caller_identity.this.account_id}:*"]
     }
   }
 

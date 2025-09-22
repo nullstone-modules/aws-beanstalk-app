@@ -1,3 +1,6 @@
+# 0.3.0 (Sep 22, 2025)
+* Upgraded terraform providers.
+
 # 0.2.5 (Feb 10, 2024)
 * Added permissions to `adminer` to fix deploys and ssh.
 
