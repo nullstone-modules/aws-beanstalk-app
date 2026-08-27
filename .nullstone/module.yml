@@ -4,6 +4,7 @@ friendly_name: Elastic Beanstalk App
 description: Creates an elastic beanstalk application that can be launched across AWS accounts
 category: app
 subcategory: server
+app_type: generic
 provider_types:
     - aws
 platform: ec2
