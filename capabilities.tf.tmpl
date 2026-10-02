@@ -47,15 +47,20 @@ locals {
 }
 
 locals {
-  cap_env_vars = merge([
-    for mod in local.cap_modules : {
-      for item in lookup(mod.outputs, "env", []) : "${mod.env_prefix}${item.name}" => item.value
-    }
-  ]...)
+  // cap_prefixes is keyed by capability name for ns_env_layout / ns_env_values
+  cap_prefixes = {
+    for mod in local.cap_modules : mod.name => mod.env_prefix
+  }
 
-  cap_secrets = merge([
-    for mod in local.cap_modules : {
-      for item in lookup(mod.outputs, "secrets", []) : "${mod.env_prefix}${item.name}" => sensitive(item.value)
-    }
-  ]...)
+  cap_env = flatten([
+    for mod in local.cap_modules : [
+      for item in lookup(mod.outputs, "env", []) : { capability = mod.name, name = item.name, value = item.value }
+    ]
+  ])
+
+  cap_secrets = flatten([
+    for mod in local.cap_modules : [
+      for item in lookup(mod.outputs, "secrets", []) : { capability = mod.name, name = item.name, value = sensitive(item.value) }
+    ]
+  ])
 }

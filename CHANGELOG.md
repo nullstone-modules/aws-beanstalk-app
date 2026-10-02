@@ -1,3 +1,9 @@
+# 0.5.0 (Oct 2, 2026)
+* Upgraded `nullstone-io/ns` provider to `~> 0.13.0`.
+* Replaced `ns_env_variables` and `ns_secret_keys` with the layered `ns_env_layout`, `ns_env_values`, and `ns_env_platform_data` data sources to aggregate environment variables and secrets.
+* Emitted the `env` platform data record, including the source of each variable and the Secrets Manager ARN of each managed secret.
+* Upgraded capability scaffolding to emit `capability` on capability env vars and secrets and `cap_prefixes`.
+
 # 0.4.0 (Jun 19, 2026)
 * Upgraded `nullstone-io/ns` provider to `~> 0.11.0`.
 * Used `aws_tags` from `data.ns_workspace` to tag all resources via provider `default_tags`.
