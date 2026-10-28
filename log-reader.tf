@@ -30,8 +30,11 @@ data "aws_iam_policy_document" "log_reader" {
       "logs:Filter*"
     ]
 
+    // Log Group actions (FilterLogEvents, StartQuery, ...) require the Log Group ARN as of 2027-04-26.
+    // The Log Stream ARN stays for the stream-scoped actions (GetLogEvents).
     resources = [
-      "arn:aws:logs:${local.region}:${data.aws_caller_identity.this.account_id}:log-group:${local.log_group}:log-stream:*"
+      "arn:aws:logs:${local.region}:${data.aws_caller_identity.this.account_id}:log-group:${local.log_group}",
+      "arn:aws:logs:${local.region}:${data.aws_caller_identity.this.account_id}:log-group:${local.log_group}:log-stream:*",
     ]
   }
 }
